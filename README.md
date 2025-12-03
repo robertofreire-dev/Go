@@ -15,3 +15,6 @@ to create a module: go mod init packagesandmoduleexample
 this folder where go.mod lives and all subfolders belongs to module packagesandmoduleexample
 
 to use all Go files in the folder, use: go run . 
+or use: go build
+
+## Variables, Values & Operators
