@@ -1,4 +1,4 @@
-package main
+package greet
 
 import (
 	"bufio"
@@ -6,10 +6,8 @@ import (
 	"os"
 )
 
-// go run app.go
-
-func main() {
-	fmt.Print("Hello World")
+func Hello(name string) {
+	fmt.Printf("Hello, %s!\n", name)
 	fmt.Print("Press Enter to exit...")
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 }
