@@ -22,6 +22,7 @@ or use: go build
 
 ## Routines
 
+```
 Run Concurrently
 Result from database:  id1
 Result from database:  id2
@@ -51,5 +52,6 @@ Current results:  [id3 id1 id2 id5 id4]
 
 Total execution time: 1.003036s
 Results: [id3 id1 id2 id5 id4]
+```
 
 ## Channels
