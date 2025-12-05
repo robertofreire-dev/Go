@@ -55,3 +55,7 @@ Results: [id3 id1 id2 id5 id4]
 ```
 
 ## Channels
+
+- Hold data
+- thread safe
+- listen for data (added/removed) and can block code execution until one of these events happens
