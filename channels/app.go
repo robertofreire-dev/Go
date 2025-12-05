@@ -2,10 +2,34 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	runChannelWithSingleValue()
+	//runChannelWithSingleValue()
+	runChannelWithMultipleValues()
+}
+
+func runChannelWithMultipleValues() {
+	fmt.Println("Run channel with single value")
+	t0 := time.Now()
+	var c = make(chan int)
+	go process(c)
+	for i := range c {
+		fmt.Println(i)
+		time.Sleep(time.Second * 1)
+	}
+	fmt.Printf("\nTotal execution time: %v", time.Since(t0))
+	fmt.Println("")
+	fmt.Println("Run channel with multiple values")
+	t1 := time.Now()
+	var c2 = make(chan int, 3)
+	go process(c2)
+	for i := range c2 {
+		fmt.Println(i)
+		time.Sleep(time.Second * 1)
+	}
+	fmt.Printf("\nTotal execution time: %v", time.Since(t1))
 }
 
 func runChannelWithSingleValue() {
@@ -14,9 +38,9 @@ func runChannelWithSingleValue() {
 	// deadLockExample(c)
 	go process(c)
 	// note that there is no WaitGroup. so code continues and doesn't wait for the process routine to finish
-	fmt.Println(<-c) // this code is blocked (waiting for some value be added to channel c). process function will concurrently unblock this code when c <- i happens
-	for i := range c {
-		fmt.Println(i) // this code is blocked (waiting for some value be added to channel c)
+	fmt.Println(<-c)   // this code is blocked (waiting for some value be added to channel c). process function will concurrently unblock this code when c <- i happens
+	for i := range c { // this code is blocked (waiting for some value be added to channel c)
+		fmt.Println(i)
 	}
 }
 
@@ -26,6 +50,7 @@ func process(c chan int) {
 	for i := 0; i < 5; i++ {
 		c <- i
 	}
+	fmt.Println("Exit Process")
 }
 
 func deadLockExample(c chan int) {
